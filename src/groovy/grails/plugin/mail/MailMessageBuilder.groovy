@@ -284,6 +284,10 @@ class MailMessageBuilder {
         }
     }
 
+	private convertMessage(MimeMessage msg){
+		new org.springframework.mail.javamail.MimeMailMessage(msg)
+	}
+	
 	void message(MimeMessage msg) {
 		this.external = true;
 		this.message = convertMessage(msg)
