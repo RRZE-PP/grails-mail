@@ -12,23 +12,12 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenLocal()
         mavenCentral()
-		
-		def ppRepo = grailsSettings.config.grails.project.repos.ppArtifactory
-		if(ppRepo){
-			mavenRepo(id:ppRepo.id , url:ppRepo.url) {
-				updatePolicy 'always'
-				auth([
-					username: ppRepo.username,
-					password: ppRepo.password
-				])
-			}
-		}
     }
 
     dependencies {
 		compile "javax.mail:javax.mail-api:1.5.1"
         runtime "com.sun.mail:javax.mail:1.5.1"
-		
+        
 		// for signing and encrypting
 		compile 'org.bouncycastle:bcprov-jdk16:1.46'
 		compile 'org.bouncycastle:bcpg-jdk16:1.46'

@@ -20,7 +20,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl
 import grails.plugin.mail.*
 
 class MailGrailsPlugin {
-    def version = "1.0.8_rrze"
+    def version = "1.0.8-SNAPSHOT"
     def grailsVersion = "1.3 > *"
 
     def author = "Grails Plugin Collective"
@@ -52,8 +52,7 @@ sendMail {
         [ name: "Peter Ledbrook", email: "pledbrook@vmware.com" ],
         [ name: "Jeff Brown", email: "jbrown@vmware.com" ],
         [ name: "Graeme Rocher", email: "grocher@vmware.com" ],
-        [ name: "Marc Palmer", email: "marc@grailsrocks.com" ],
-		[ name: "Krasimir Zhelev", email: "kraimir.zhelev@fau.de" ]
+        [ name: "Marc Palmer", email: "marc@grailsrocks.com" ]
     ]
 
     def issueManagement = [ system: "JIRA", url: "http://jira.grails.org/browse/GPMAIL" ]
