@@ -12,6 +12,17 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenLocal()
         mavenCentral()
+		
+		def ppRepo = grailsSettings.config.grails.project.repos.ppArtifactory
+		if(ppRepo){
+			mavenRepo(id:ppRepo.id , url:ppRepo.url) {
+				updatePolicy 'always'
+				auth([
+					username: ppRepo.username,
+					password: ppRepo.password
+				])
+			}
+		}
     }
 
     dependencies {
