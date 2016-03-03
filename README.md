@@ -16,6 +16,44 @@ Please see the [User Guide](http://gpc.github.com/grails-mail/ "Grails Mail Plug
 
 The plugin is released under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.html "Apache License, Version 2.0 - The Apache Software Foundation") and is produced under the [Grails Plugin Collective](http://gpc.github.com/).
 
+## Signing and Encryption
+
+Per mail signing and encryption. The domain option changes the Message-ID to look like 1457016543218.1481006193.myserver@example.com 
+
+    mailService.sendMail {
+       sign [ keyStoreLocation:'/opt/keys/key.p12',
+				keyStorePassword : 'dummy',
+				keyPassword : 'dummy',
+				keyAlias : 'Dummy User']
+       encrypt [ trustStoreLocation:'/opt/certs/cert.p12',
+				trustStorePassword : 'dummy',
+				certAlias : 'Dummy User']
+       domain 'example.com'
+       to "fred@gmail.com","ginger@gmail.com"
+       from "john@gmail.com"
+       cc "marge@gmail.com", "ed@gmail.com"
+       bcc "joe@gmail.com"
+       subject "Hello John"
+       text 'this is some text'
+    }
+
+Global settings for every mail unless overriden:
+
+	grails {
+		mail {
+			host = "smtp.uni-erlangen.de"
+			port = 25
+			domain = 'example.com'
+			sign = [ keyStoreLocation:'/opt/keys/key.p12',
+				keyStorePassword : 'dummy',
+				keyPassword : 'dummy',
+				keyAlias : 'Dummy User']
+			encrypt =  [ trustStoreLocation:'/opt/certs/cert.p12',
+				trustStorePassword : 'dummy',
+				certAlias : 'Dummy User']
+		}
+	}
+
 ## Issues
 
 Issues can be raised via the [Codehaus Jira](http://jira.codehaus.org/browse/GRAILSPLUGINS/component/13340 "Grails Plugins: Grails-Mail - jira.codehaus.org").
