@@ -37,9 +37,9 @@ grails.project.dependency.resolution = {
 		}
 		
 		// for signing and encrypting
-		compile 'org.bouncycastle:bcprov-jdk15on:1.56'
-		compile 'org.bouncycastle:bcpg-jdk15on:1.56'
-		compile 'org.bouncycastle:bcmail-jdk15on:1.56'
+		compile 'org.bouncycastle:bcprov-jdk15on:1.58'
+		compile 'org.bouncycastle:bcpg-jdk15on:1.58'
+		compile 'org.bouncycastle:bcmail-jdk15on:1.58'
     }
 
     plugins {
