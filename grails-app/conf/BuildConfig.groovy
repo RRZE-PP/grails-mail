@@ -32,7 +32,7 @@ grails.project.dependency.resolution = {
         runtime "com.sun.mail:javax.mail:1.5.1"
         
 		
-		build('org.grails:grails-docs:2.5.3') {
+		build('org.grails:grails-docs:2.3.8') {
 			excludes 'itext'
 		}
 		
@@ -43,9 +43,9 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        test (":greenmail:1.3.4") {
-            export = false
-        }
+//        test (":greenmail:1.3.4") {
+//            export = false
+//        }
         build ":tomcat:7.0.52.1", ':release:3.0.1', ':rest-client-builder:2.0.1', {
             export = false
         }
