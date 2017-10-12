@@ -22,6 +22,10 @@ import org.bouncycastle.asn1.x509.*;
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+import org.bouncycastle.cms.jcajce.JceKeyTransRecipientInfoGenerator;
+import org.bouncycastle.cms.CMSAlgorithm;
+import org.bouncycastle.cms.jcajce.JcaSimpleSignerInfoGeneratorBuilder;
+import org.bouncycastle.cms.jcajce.JceCMSContentEncryptorBuilder;
 
 import javax.activation.CommandMap
 import javax.activation.MailcapCommandMap
@@ -199,8 +203,9 @@ class MailSecurityHelper {
 			setMailCommandMap()
 
 			def gen = getSMIMEGenerator(keyStore, alias, keyPassword)
+			
 			//Sign
-			MimeMultipart mainPart = gen.generate(msg , "BC");
+			MimeMultipart mainPart = gen.generate(msg);
 
 			/* Set all original MIME headers in the signed message */
 			Enumeration headers = msg.getAllHeaderLines();
@@ -224,7 +229,7 @@ class MailSecurityHelper {
 	static getSMIMEEnvelopedGenerator(keyStore, alias){
 		SMIMEEnvelopedGenerator generator = new SMIMEEnvelopedGenerator();
 
-		generator.addKeyTransRecipient(getIssuer(keyStore, alias));
+		generator.addRecipientInfoGenerator(new JceKeyTransRecipientInfoGenerator(getIssuer(keyStore, alias)).setProvider("BC"));
 
 		return generator
 	}
@@ -234,8 +239,13 @@ class MailSecurityHelper {
 
 		def generator = getSMIMEEnvelopedGenerator(keyStore, alias)
 
-		MimeBodyPart mimeBodyPart = generator.generate(msg, SMIMEEnvelopedGenerator.RC2_CBC, "BC");
+		// old version
+		//MimeBodyPart mimeBodyPart = generator.generate(msg, SMIMEEnvelopedGenerator.RC2_CBC, "BC");
 
+		/* Encrypt the message */
+		MimeBodyPart mimeBodyPart = generator.generate(msg,
+				new JceCMSContentEncryptorBuilder(CMSAlgorithm.RC2_CBC).setProvider("BC").build());
+		
 		/*
 		 * Create a new MimeMessage that contains the encrypted and signed
 		 * content

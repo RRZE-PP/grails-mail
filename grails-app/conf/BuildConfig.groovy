@@ -6,7 +6,9 @@ grails.project.work.dir = "target"
 grails.project.dependency.resolver = "maven"
 grails.project.dependency.resolution = {
 
-    inherits("global")
+    inherits("global"){
+		excludes "grails-docs"
+	}
 
     repositories {
         grailsCentral()
@@ -29,10 +31,15 @@ grails.project.dependency.resolution = {
 		compile "javax.mail:javax.mail-api:1.5.1"
         runtime "com.sun.mail:javax.mail:1.5.1"
         
+		
+		build('org.grails:grails-docs:2.5.3') {
+			excludes 'itext'
+		}
+		
 		// for signing and encrypting
-		compile 'org.bouncycastle:bcprov-jdk16:1.46'
-		compile 'org.bouncycastle:bcpg-jdk16:1.46'
-		compile 'org.bouncycastle:bcmail-jdk16:1.46'
+		compile 'org.bouncycastle:bcprov-jdk15on:1.56'
+		compile 'org.bouncycastle:bcpg-jdk15on:1.56'
+		compile 'org.bouncycastle:bcmail-jdk15on:1.56'
     }
 
     plugins {
